@@ -123,6 +123,24 @@ header .icons #menu-bars{
     display: none;
 }
 
+header .icons .icon-cart{
+    position: relative;
+    }
+
+header .icons span{
+    display: flex;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    right: 90px;
+}
+
 #search-form {
     position: fixed;
     top:-110%; left:0;

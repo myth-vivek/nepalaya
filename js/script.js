@@ -89,7 +89,7 @@ var swiper = new Swiper(".home-slider", {
   let closeCart = document.querySelector('.close');
   let listProductHTML = document.querySelector('.listProduct');
   let listCartHTML = document.querySelector('.listCart');
-  let iconCartSpan = document.querySelector('.icon-cart span');
+  let iconCartSpan = document.querySelector('.icons span');
 
   let listProducts = [];
   let carts = [];
@@ -156,9 +156,14 @@ var swiper = new Swiper(".home-slider", {
       carts[positionThisProductInCart].quantity = carts[positionThisProductInCart].quantity + 1;
     }
     addCartToHTML();
+    addCartToMemory();
   }
 
-  const addCartToHTML = () =>{
+  const addCartToMemory = () => {
+    localStorage.setItem('cart', JSON.stringify(carts));
+  }
+
+  const addCartToHTML = () => {
     listCartHTML.innerHTML = '';
     let totalQuantity = 0;
     if(carts.length > 0){
@@ -186,7 +191,7 @@ var swiper = new Swiper(".home-slider", {
           listCartHTML.appendChild(newCart);
       })
     }
-    iconCartHTML.appendChild(newCart);
+    iconCartSpan.innerHTML = totalQuantity;
   }
 
   const initApp = () => {
@@ -196,6 +201,12 @@ var swiper = new Swiper(".home-slider", {
     .then(data => {
       listProducts = data;
       addDataToHTML();
+
+      //get cart from memory
+      if(localStorage.getItem('cart')){
+        carts = JSON.parse(localStorage.getItem('cart'));
+        addCartToHTML();
+      }
     })
   }
 
